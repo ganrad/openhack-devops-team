@@ -1,4 +1,4 @@
-name: POI API .NET Core
+name: POI API .NET Core (GR)
 
 env:
   poi_path: apis/poi/**
