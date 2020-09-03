@@ -15,13 +15,13 @@ on:
     branches: [ master ]
     paths: 
       - apis/poi/**
-      - .github/workflows/poi.yml
+      - .github/workflows/poi-api.yml
       
   pull_request:
     branches: [ master ]
     paths: 
       - apis/poi/**
-      - .github/workflows/poi.yml
+      - .github/workflows/poi-api.yml
       
 jobs:
   build_and_test:
