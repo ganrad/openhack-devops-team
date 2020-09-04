@@ -1,6 +1,17 @@
 # This is a basic workflow to help you get started with Actions
 
 name: Build-Push POI API image; Deploy 2 staging
+# Define env variables
+env:
+  poi_path: apis/poi/**
+  registry: docker.pkg.github.com
+  repository: ganrad/openhack-devops-team-20/api-poi
+  docker_path: apis/poi/web
+  staging_url: https://openhackvm13xxh0poi-staging.azurewebsites.net/
+  prod_url: https://openhackvm13xxh0poi.azurewebsites.net/
+  resource_group: openhackvm13xxh0rg
+  webapp_name: openhackvm13xxh0poi
+  build_name: POI 
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -39,3 +50,33 @@ jobs:
       # List the images in your repo
       - name: Docker image list
         run: docker image ls $registry/$repository
+      
+  deploy_staging:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    needs: docker_build_and_push
+    steps:
+    - name: Azure authentication
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS  }}
+
+    - name: Azure WebApp
+      uses: Azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.webapp_name }}
+        slot-name: staging
+        images: ${{ env.registry }}/${{ env.repository }}:${{github.run_number}}
+
+    - uses: actions/github-script@0.9.0
+      if: failure()
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          let body = "${{ env.build_name }} Worflow Failure \n Build Number: ${{ github.run_number }} \n Build Log: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }} \n SHA: [${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }}) \n";
+          github.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: "${{ env.build_name }} Workflow ${{ github.run_number }} Failed! ",
+            body: body
+          });
