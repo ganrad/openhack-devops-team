@@ -8,7 +8,7 @@ env:
   acr_registry: openhackvm13xxh0acr.azurecr.io 
   repository: ganrad/openhack-devops-team-20/api-poi
   docker_path: apis/poi/web
-  staging_url: https://openhackvm13xxh0poi-staging.azurewebsites.net/
+  staging_url: https://openhackvm13xxh0poi-staging.azurewebsites.net/api/healthcheck/poi
   prod_url: https://openhackvm13xxh0poi.azurewebsites.net/
   resource_group: openhackvm13xxh0rg
   webapp_name: openhackvm13xxh0poi
