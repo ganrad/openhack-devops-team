@@ -1,4 +1,4 @@
-name: POI API .NET Core - 05
+name: Build-Test POI API .NET Core
 
 env:
   poi_path: apis/poi/**
