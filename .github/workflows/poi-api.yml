@@ -22,6 +22,7 @@ on:
     paths: 
       - apis/poi/**
       - .github/workflows/poi-api.yml
+      - .github/workflows/po-ch4-cd.yml
       
 jobs:
   build_and_test:
