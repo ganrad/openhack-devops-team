@@ -11,11 +11,11 @@ env:
   webapp_name: openhackvm13xxh0poi
   build_name: POI  
 on:
-  push:
-    branches: [ master ]
-    paths: 
-      - apis/poi/**
-      - .github/workflows/poi-api.yml
+  #push:
+    #branches: [ master ]
+    #paths: 
+     # - apis/poi/**
+     # - .github/workflows/poi-api.yml
       
   pull_request:
     branches: [ master ]
