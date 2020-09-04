@@ -43,8 +43,8 @@ jobs:
     - name: .NET Build Web
       run: dotnet build --configuration Release --no-restore apis/poi/web/*.csproj
     
-    - name: .NET Build Unit Tests
-      run: dotnet build --configuration Release --no-restore apis/poi/tests/UnitTests/UnitTests.csproj
+    # - name: .NET Build Unit Tests
+      #run: dotnet build --configuration Release --no-restore apis/poi/tests/UnitTests/UnitTests.csproj
       
-    - name: .NET Test
-      run: dotnet test --no-restore --verbosity normal apis/poi/tests/UnitTests /p:CoverletOutput=lcov/ /p:CoverletOutput=lcov
+    #- name: .NET Test
+      #run: dotnet test --no-restore --verbosity normal apis/poi/tests/UnitTests /p:CoverletOutput=lcov/ /p:CoverletOutput=lcov
